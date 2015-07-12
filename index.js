@@ -1,28 +1,28 @@
 /*
-    Implements keyword providing (parsing) from the folder defined.
+ Implements keyword providing (parsing) from the folder defined.
 
-    Main purpose is to handle two or more keyword subsets.
+ Main purpose is to handle two or more keyword subsets.
  */
 var fs = require('fs');
 var path = require('path');
 
 /*
-    Default Config, serves for parsing of .lex files with following structure:
-    KEY value\r\nHEY helue
+ Default Config, serves for parsing of .lex files with following structure:
+ KEY value\r\nHEY helue
 
-    Real Example:
-    BETTER stronger
-    FASTER bigger
-    OOWHOA oowhoa
+ Real Example:
+ BETTER stronger
+ FASTER bigger
+ OOWHOA oowhoa
  */
 var CONFIG = {
-    
+
     /**
      * Folder to lookup for keywords.
      * @type {String}
      */
     folder: './',
-    
+
     /**
      * Extension name for keyword files.
      * @type {String}
@@ -31,7 +31,7 @@ var CONFIG = {
 
     /**
      * Separator between each keyword definition
-     * 
+     *
      * @type {String}
      */
     sep: '\r\n',
@@ -45,7 +45,7 @@ var CONFIG = {
 /**
  * Inverts the given object.
  * @remark Be patient, may iterate by inherited properties of object.
- * 
+ *
  * @param {Object} object Object with structure (KEY: value)
  * @returns {Object} Object with inverted structure (VALUE: key)
  */
@@ -62,7 +62,7 @@ function invert(object) {
 
 /**
  * Main provider object.
- * 
+ *
  * @param config @see CONFIG
  * @constructor
  */
@@ -114,7 +114,7 @@ Provider.prototype = {
                     this.keywords[lexName][parts[0]] = parts[1];
                 }, this);
 
-                this.keywordMaps[lexName] = invert(this.keywordMaps[lexName]);
+                this.keywordMaps[lexName] = invert(this.keywords[lexName]);
             }
         }, this);
     },
@@ -145,7 +145,7 @@ Provider.prototype = {
      * @param {String} keyword Actual keyword value
      * @param {String} subset Name of one of loaded subsets
      */
-    getKeyId: function(subsets, keyword) {
+    getKeyId: function(subset, keyword) {
         return this.keywordMaps[subset][keyword];
     },
 
