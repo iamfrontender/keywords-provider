@@ -97,7 +97,6 @@ Provider.prototype = {
      */
     initKeywords: function(directory) {
         var lexems = fs.readdirSync(directory);
-        var scope = this;
 
         this.keywords = {};
         this.keywordMaps = {};
@@ -107,15 +106,15 @@ Provider.prototype = {
                 var lexName = path.basename(lexDefinition).split('.')[0];
                 var lexFile = String(fs.readFileSync(path.join(directory, lexDefinition)));
 
-                scope.lexems[lexName] = {};
+                this.keywords[lexName] = {};
 
                 lexFile = lexFile.split(this.sep);
                 lexFile.forEach(function(lexem) {
                     var parts = lexem.split(this.delim);
-                    scope.lexems[lexName][parts[0]] = parts[1];
+                    this.keywords[lexName][parts[0]] = parts[1];
                 }, this);
 
-                scope.lexemMaps[lexName] = invert(scope.lexems[lexName]);
+                this.keywordMaps[lexName] = invert(this.keywordMaps[lexName]);
             }
         }, this);
     },
