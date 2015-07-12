@@ -9,8 +9,8 @@ Distributed via npm, run `npm i keywords-provider` in project you want this code
 
 ## Usage
 ```javascript
-var KeywordProvider = require('keyword-provider);
-var r2js = new KeywordProvider({
+var KeywordsProvider = require('keywords-provider);
+var r2js = new KeywordsProvider({
   folder: './keywords'
 });
 ```
@@ -30,7 +30,7 @@ AIR plane
 HOVER board
 ```
 
-### KeywordProvider interface
+### KeywordsProvider interface
 ```java
 /**
  * Applies the given config to Provider instance
